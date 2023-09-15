@@ -1,23 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+
+import Web from "./components/Web";
+import Home from "./components/Home";
+
+const videoConstraints = {
+  width: 400,
+  height: 400,
+  facingMode: "user",
+};
 
 function App() {
+  const [picture, setPicture] = useState("");
+  const [enable, setEnable] = useState(false);
+  const [name, setName] = useState("");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ width: "25%" }} className="App">
+      {!enable ? (
+        <Home
+          setEnable={setEnable}
+          picture={{ picture }}
+          name={name}
+          setName={setName}
+        />
+      ) : (
+        <>
+          <Web
+            setPicture={setPicture}
+            setEnable={setEnable}
+            picture={{ picture }}
+            name={name}
+            setName={setName}
+          />
+        </>
+      )}
     </div>
   );
 }
